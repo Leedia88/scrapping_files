@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'open-uri'
 
 PAGE_URL = "https://coinmarketcap.com/all/views/all/"
-page = Nokogiri::HTML(open(PAGE_URL))
+page = Nokogiri::HTML(URI.open(PAGE_URL))
 
 puts page.class
 
@@ -29,24 +29,43 @@ def parsing_table(page, num)
   prix = []
 
   # on sélectionn toutes les link avec le prix, on prend le texte et le met dans une array
-  page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__price a').each do |link|
-    prix << link.text
+  page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__price a').take(num).each do |link|
+    prix_f  = link.text.tr('$', '').to_f
+    prix << prix_f
   end
 
-  page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row a.cmc-table__column-name--name').each do |link|
+  page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__symbol').take(num).each do |link|
     crypto << link.text
   end
 
   num.times do |i|
-    result = Hash.new
-    puts "c'est #{i}"    
+    result = Hash.new   
     result[crypto[i]]= prix[i]
     array << result
-    puts result
   end
 
   return array
   
+end
+
+
+def check_table(array)
+
+  boolean = true
+
+  if array.size == 0 
+    boolean = false
+    puts "jdjd"
+  end
+
+  for item in array
+    if !(item.is_a? Hash)
+      boolean = false
+    end
+  end
+
+  return boolean
+
 end
 
 #XPATH
@@ -69,7 +88,7 @@ end
 
 # crypto = []
 # prix = []
-# page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__price a').each do |link|
+# page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__price a').take(num).each do |link|
 #   prix << link.text
 # end
 
@@ -80,8 +99,9 @@ end
 # puts prix.size
 # puts crypto.size
 
-puts page.css('div.cmc-table__table-wrapper-outer   td.cmc-table__cell--sort-by__price a').size
+# puts page.css('div.cmc-table__table-wrapper-outer   td.cmc-table__cell--sort-by__price a').size
 
-p parsing_table(page, 20)
+# p parsing_table(page, 20)
 
 
+# puts page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__price a').take(5)
