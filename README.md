@@ -1,4 +1,4 @@
-#scrapping exercices  
+# scrapping exercices  
   
 Détail des exercices.  
 ---------------
@@ -18,11 +18,11 @@ N'hésite pas à découper ton programme en plusieurs étapes simples et dont le
 * Pense à bien nommer tes variables pour ne pas te perdre !  
 * Mets des puts dans ton code pour que ton terminal affiche quelque chose à chaque fois qu'il a pu récupérer une donnée.  
 
-###tests  
+### tests  
 1. le fonctionnement de base de ton programme (pas d'erreur ni de retour vide) et   
 2.  que ton programme sort bien un array cohérent (vérifier la présence de 2-3 cryptomonnaies, vérifier que l’array est de taille cohérente, etc.).  
 -------------------
-##mairie Scrap  
+## mairie Scrap  
 Va sur cet annuaire des mairies et récupère les adresses e-mails des mairies du Val d'Oise. Comme pour l'exercice précédent, tu devras enregistrer les données dans un array de hash suivant ce format  
 `a = [  `
   `{ "ville_1" => "email_1" }, ` 
