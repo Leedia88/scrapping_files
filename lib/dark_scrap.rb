@@ -5,14 +5,6 @@ require 'open-uri'
 PAGE_URL = "https://coinmarketcap.com/all/views/all/"
 page = Nokogiri::HTML(URI.open(PAGE_URL))
 
-# a = [
-#   { "BTC" => 5245.12 },
-#   { "ETH" => 217.34 }, 
-#   etc
-# ]
-#prix  :    page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__price a')
-#abbr  :    page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__symbol')
-
 def parsing_table(page, num)
   
   array = []
@@ -58,44 +50,6 @@ def check_table(array)
     end
   end
 
-  #key ne sont pas des mots de trois lettres
-  #values ne sont pas des floats
-
   return boolean
 
 end
-
-#XPATH
-# //h3[@class='r']/a[@class='l'] #direct parent
-# //ha//a #parent at ani level
-# page.xpath("//tbody//a[@class='cmc-table__column-name--symbol cmc-link']").each do |currency| 
-#   puts currency.text
-# end
-
-# puts page.css('div.cmc-table__table-wrapper-outer table')
-# puts fetch_prices(page)
-# parsing_table(page) 
-# lignes = page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row')
-# puts "la classe de lignes #{lignes.class}"
-# result = Hash.new
-# result[lignes.css('a.cmc-link')]= lignes.css('td.cmc-table__cell--sort-by__price a')
-# puts result
-
-# crypto = []
-# prix = []
-# page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__price a').take(num).each do |link|
-#   prix << link.text
-# end
-
-# page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row a.cmc-table__column-name--name').each do |link|
-#   crypto << link.text
-# end
-
-# puts prix.size
-# puts crypto.size
-
-# puts page.css('div.cmc-table__table-wrapper-outer   td.cmc-table__cell--sort-by__price a').size
-
-# p parsing_table(page, 20)
-
-# puts page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__price a').take(5)
