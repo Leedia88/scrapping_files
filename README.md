@@ -29,3 +29,11 @@ Va sur cet annuaire des mairies et récupère les adresses e-mails des mairies d
   `{ "ville_2" => "email_2" }, `  
   `etc  `  
 `]  `  
+
+* Obtenir un e-mail de mairie à partir de la page de cette dernière (pas en partant du listing complet des mairies). Fais d'abord une méthode `get_townhall_email(townhall_url)` qui récupère l’e-mail d'une mairie à partir de l'URL de mairies, par exemple celle de Avernes. _https://www.annuaire-des-mairies.com/95/avernes.html_  
+* La prochaine étape est de coder une méthode `get_townhall_urls` qui récupère les URLs de chaque ville du Val d'Oise. _https://www.annuaire-des-mairies.com/val-d-oise.html_  
+  
+### Tests  
+  
+  * des tests de fonctionnement de base  
+  * des tests de cohérence du résultat
