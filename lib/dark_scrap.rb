@@ -5,24 +5,15 @@ require 'open-uri'
 PAGE_URL = "https://coinmarketcap.com/all/views/all/"
 page = Nokogiri::HTML(URI.open(PAGE_URL))
 
-puts page.class
-
-puts page.css('title').text
-
-
 # a = [
 #   { "BTC" => 5245.12 },
 #   { "ETH" => 217.34 }, 
 #   etc
 # ]
-
-  #prix  :    page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__price a')
-  # td.cmc-table__cell--sort-by__price a
-  # pour chaque tr ligne
-  # on stocke le prix et le nom de la crypto
+#prix  :    page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__price a')
+#abbr  :    page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__symbol')
 
 def parsing_table(page, num)
-  #page.css(div.cmc-table--sort-by__rank td)
   
   array = []
   crypto = []
@@ -34,10 +25,12 @@ def parsing_table(page, num)
     prix << prix_f
   end
 
+  # on sélectionn toutes les link avec le symbole, on prend le texte et le met dans une array
   page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__symbol').take(num).each do |link|
     crypto << link.text
   end
 
+  #on construit l'array
   num.times do |i|
     result = Hash.new   
     result[crypto[i]]= prix[i]
@@ -53,16 +46,20 @@ def check_table(array)
 
   boolean = true
 
+  #array vide
   if array.size == 0 
     boolean = false
-    puts "jdjd"
   end
 
+  #array ne contient pas des hash
   for item in array
     if !(item.is_a? Hash)
       boolean = false
     end
   end
+
+  #key ne sont pas des mots de trois lettres
+  #values ne sont pas des floats
 
   return boolean
 
@@ -71,8 +68,6 @@ end
 #XPATH
 # //h3[@class='r']/a[@class='l'] #direct parent
 # //ha//a #parent at ani level
-
-
 # page.xpath("//tbody//a[@class='cmc-table__column-name--symbol cmc-link']").each do |currency| 
 #   puts currency.text
 # end
@@ -102,6 +97,5 @@ end
 # puts page.css('div.cmc-table__table-wrapper-outer   td.cmc-table__cell--sort-by__price a').size
 
 # p parsing_table(page, 20)
-
 
 # puts page.css('div.cmc-table__table-wrapper-outer tr.cmc-table-row   td.cmc-table__cell--sort-by__price a').take(5)
