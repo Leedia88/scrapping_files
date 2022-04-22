@@ -11,11 +11,10 @@ En prenant pour source le site CoinMarketCap, fait un programme qui récupère l
   `etc  `  
 `]  `  
 * Tout se jouera sur la rédaction d'un XPath pertinent et précis qui extrait juste ce qu'il faut d'éléments HTML. Puis un bon traitement de ces éléments pour en extraire les 2 infos dont tu as besoin : le nom des crypto et leur cours.  
-N'hésite pas à découper ton programme en plusieurs étapes simples et dont le fonctionnement est facile à vérifier. 
-  
-1. Isoler les éléments HTML qui vont bien  
-2. En extraire le texte et mettre ça dans un hash  
-3. Réorganiser ce hash dans un array de plusieurs mini-hash comme demandé.  
+N'hésite pas à découper ton programme en plusieurs étapes simples et dont le fonctionnement est facile à vérifier.   
+    1. Isoler les éléments HTML qui vont bien  
+    2. En extraire le texte et mettre ça dans un hash  
+    3. Réorganiser ce hash dans un array de plusieurs mini-hash comme demandé.  
 * Pense à bien nommer tes variables pour ne pas te perdre !  
 * Mets des puts dans ton code pour que ton terminal affiche quelque chose à chaque fois qu'il a pu récupérer une donnée.  
   
